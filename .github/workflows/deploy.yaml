@@ -7,7 +7,16 @@ on:
   pull_request:
     branches:
       - main
-
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Ação a executar (apply ou destroy)'
+        required: true
+        default: 'apply'
+        type: choice
+        options:
+          - apply
+          - destroy
 # Variáveis globais para o Runner
 env:
   TF_VERSION: "1.10.5" # Versão segura do Terraform (OpenTofu compatible se precisar)
@@ -51,6 +60,11 @@ jobs:
         working-directory: ${{ env.WORKING_DIR_VPC }}
         run: terragrunt plan --terragrunt-non-interactive
 
+      #  O GATILHO MANUAL (Botão de Emergência: Roda Apply ou Destroy)
+      - name: 'Terragrunt Action (Manual)'
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: ${{ env.WORKING_DIR_VPC }}
+        run: terragrunt ${{ github.event.inputs.action }} --auto-approve --terragrunt-non-interactive
       # O APPLY SÓ RODA SE FOR UM PUSH NA MAIN (Não roda em PRs)
       - name: 'Terragrunt Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -94,6 +108,11 @@ jobs:
         working-directory: ${{ env.WORKING_DIR_EKS }}
         run: terragrunt plan --terragrunt-non-interactive
 
+      #  O GATILHO MANUAL (Botão de Emergência: Roda Apply ou Destroy)
+      - name: 'Terragrunt Action (Manual)'
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: ${{ env.WORKING_DIR_EKS }}
+        run: terragrunt ${{ github.event.inputs.action }} --auto-approve --terragrunt-non-interactive
       # O APPLY SÓ RODA SE FOR UM PUSH NA MAIN (Não roda em PRs)
       - name: 'Terragrunt Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
