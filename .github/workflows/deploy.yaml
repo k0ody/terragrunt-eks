@@ -16,7 +16,7 @@ env:
   WORKING_DIR_EKS: "live/dev/eks/" # Apontando para a pasta "pai" do ambiente de desenvolvimento  
 jobs:
   terragrunt-vpc:
-    name: 'Terragrunt CI/CD'
+    name: 'Create VPC Dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -58,7 +58,7 @@ jobs:
         run: terragrunt apply --terragrunt-non-interactive
   terragrunt-eks:
     needs: terragrunt-vpc
-    name: 'Terragrunt CI/CD'
+    name: 'Create EKS Cluster'
     runs-on: ubuntu-latest
     
 
