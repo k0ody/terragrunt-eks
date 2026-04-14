@@ -10,7 +10,7 @@ on:
 
 # Variáveis globais para o Runner
 env:
-  TF_VERSION: "1.10.0" # Versão segura do Terraform (OpenTofu compatible se precisar)
+  TF_VERSION: "1.10.5" # Versão segura do Terraform (OpenTofu compatible se precisar)
   TG_VERSION: "0.55.0" # Versão recente do Terragrunt
   WORKING_DIR_VPC: "live/dev/vpc/" # Apontando para a pasta "pai" do ambiente de desenvolvimento
   WORKING_DIR_EKS: "live/dev/eks/" # Apontando para a pasta "pai" do ambiente de desenvolvimento  
