@@ -10,7 +10,7 @@ on:
 
 # Variáveis globais para o Runner
 env:
-  TF_VERSION: "1.5.7" # Versão segura do Terraform (OpenTofu compatible se precisar)
+  TF_VERSION: "1.10.0" # Versão segura do Terraform (OpenTofu compatible se precisar)
   TG_VERSION: "0.55.0" # Versão recente do Terragrunt
   WORKING_DIR_VPC: "live/dev/vpc/" # Apontando para a pasta "pai" do ambiente de desenvolvimento
   WORKING_DIR_EKS: "live/dev/eks/" # Apontando para a pasta "pai" do ambiente de desenvolvimento  
@@ -54,7 +54,7 @@ jobs:
       # O APPLY SÓ RODA SE FOR UM PUSH NA MAIN (Não roda em PRs)
       - name: 'Terragrunt Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        working-directory: ${{ env.WORKING_DIR }}
+        working-directory: ${{ env.WORKING_DIR_VPC }}
         run: terragrunt apply --terragrunt-non-interactive
   terragrunt-eks:
     needs: terragrunt-vpc
