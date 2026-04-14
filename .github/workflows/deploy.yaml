@@ -55,7 +55,7 @@ jobs:
       - name: 'Terragrunt Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         working-directory: ${{ env.WORKING_DIR_VPC }}
-        run: terragrunt apply --terragrunt-non-interactive
+        run: terragrunt apply --auto-approve --terragrunt-non-interactive
   terragrunt-eks:
     needs: terragrunt-vpc
     name: 'Create EKS Cluster'
@@ -98,4 +98,4 @@ jobs:
       - name: 'Terragrunt Apply'
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         working-directory: ${{ env.WORKING_DIR_EKS }}
-        run: terragrunt apply --terragrunt-non-interactive
+        run: terragrunt apply --auto-approve --terragrunt-non-interactive
