@@ -1,0 +1,33 @@
+# Terraform local state
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Terragrunt cache
+**/.terragrunt-cache/
+
+# Terraform working directories
+**/.terraform/
+
+# Terraform plan and override files
+*.tfplan
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Local CLI config
+.terraformrc
+terraform.rc
+
+# IDE/editor files
+*.swp
+*~
+.DS_Store
+.idea/
+.vscode/
+*.log
